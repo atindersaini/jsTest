@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>JavaScript Test</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.2/jquery.min.js"></script>
+    <style type="text/css">
+        li {
+            margin-top: 5px;
+        }
+    </style>
+
+
+    <!-- insert the script to display the Hello World message here -->
+    <script>
+        $(document).ready(function() {
+            $('button#submit').on('click', function addTerm() {
+                //                alert($('#termType').val());
+                var termType = $('#termType').val();
+                var termText = $('#termText').val();
+                if( termText == ""){
+                  alert("Text is required");
+                  return false;
+                }
+                //                alert(termText);
+                var tagText = termText;
+                if (termType == "positive") {
+                    $('#positive-box').append('<li><p class="btn btn-success"><span>' + tagText + ' </span><i class="glyphicon glyphicon-trash"></i></p></li>');
+                    $('#termText').val('');
+                    $('#termType').val('');
+
+                    $(function() {
+                  		$( "li", "#positive-box" ).sort(function( a, b ) {
+                  			return $( a ).text() > $( b ).text();
+                  		}).appendTo( "#positive-box" );
+                  	});
+
+                } else if (termType == "negative"){
+                    $('#negative-box').append('<li><p class="btn btn-danger"><span>' + tagText + ' </span><i class="glyphicon glyphicon-trash"></i></p></li>');
+                    $('#termText').val('');
+                    $('#termType').val('');
+
+                    $(function() {
+                  		$( "li", "#negative-box" ).sort(function( a, b ) {
+                  			return $( a ).text() > $( b ).text();
+                  		}).appendTo( "#negative-box" );
+                  	});
+                }
+                else{
+                  alert("Choose a Type");
+                  $('#termType').val('');
+                }
+
+            });
+
+            $('#positive-box').on('click', 'span', function() {
+                var tagText = $(this).text();
+                $('#termText').val(tagText);
+            });
+            $('#negative-box').on('click', 'span', function() {
+                var tagText = $(this).text();
+                $('#termText').val(tagText);
+            });
+
+            function deleteItem() {
+                $(this).parent().remove();
+            }
+            $(document).on('click', '.glyphicon-trash', deleteItem);
+
+        });
+    </script>
+
+</head>
+
+<body>
+    <!-- Add your site or application content here -->
+    <div class="header">
+
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container">
+                <h3>JavaScript Test</h3>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <div class="container">
+        <div class="well col-sm-4">
+            <form role="form" onsubmit="return false;">
+                <div class="form-group">
+                    <label for="term" class="control-label"><strong>Term :</strong></label>
+                    <input type="text" name="myText" class="form-control" placeholder="Enter your term..." id="termText" maxlength="50" required />
+                </div>
+                <div class="form-group">
+                    <label value="termType" class="control-label"><strong>Type :</strong></label>
+                    <select name="selection" id="termType" class="form-control" required>
+                        <option value="">Choose a Type</option>
+                        <option value="positive">Positive</option>
+                        <option value="negative">Negative</option>
+                    </select>
+                </div>
+                <button id="submit" class="btn btn-primary">Add Term</button>
+            </form>
+        </div>
+        <div class="col-sm-4 ">
+            <p><strong>Positive</strong></p>
+
+            <ul id="positive-box" class="well list-unstyled">
+                <!--li>
+                    <p class="btn btn-success"><span>Yo</span><i class="glyphicon glyphicon-trash"></i></p>
+                </li-->
+            </ul>
+
+        </div>
+        <div class="col-sm-4 ">
+            <p><strong>Negative</strong></p>
+
+            <ul id="negative-box" class="well list-unstyled">
+                <!--li>
+                    <p class="btn btn-danger"><span>No </span><i class="glyphicon glyphicon-trash"></i></p>
+                </li-->
+            </ul>
+
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <p>Made with <span class="glyphicon glyphicon-heart"></span> by Atinder Saini</p>
+        </div>
+    </div>
+
+
+    <!-- endbuild -->
+</body>
+
+</html>
